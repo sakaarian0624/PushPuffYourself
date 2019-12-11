@@ -14,12 +14,17 @@ var pushMake = ()=>{
     if(x >= limit){
         x = 1;
     };
+    /* 別の書き方
+    if(++x >= limit){
+        x = 1;
+    };
+    */
     console.log(limit);
 }
 var pushSet = ()=>{ const timer =　setInterval(()=>{
-	if( onoff == 0){
+	if (onoff == 0){
 		clearInterval(timer);
-	}else if(onoff == 1){
+	} else if(onoff == 1){
 	   pushMake();
 	}
 }
