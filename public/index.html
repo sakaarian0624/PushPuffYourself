@@ -1,0 +1,84 @@
+<!DOCTYPE>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+            <title>通知学習2</title>
+            <link rel="stylesheet" href="css/PushpuffY.css">
+		</head>
+		<body>
+            <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
+            <div class="header">
+                <img src="image/logo.png" height="130px">
+            </div>
+            <div class="discription">
+                <p class="disp">・このサイトはポートフォリオサイトです！！！</p>
+                <p class="disp">・このサイトはブラウザ通知による学習サポートサイトです</p>
+                <p class="disp">・自分に送りたい言葉を入力し、10秒ごとに通知を送ります</p>
+                <p class="disp">・知識習得だけでなく、自分へのプレッシャーややる気を出す目的で使用できます</p>
+                <p class="disp">・ゲームプレイ時やネット閲覧時などに併用してご利用ください(ブラウザを最小化しても問題なく通知は届きます)</p>
+                <p class="disp">・ブラウザはGoogleChromeを推奨しております、他のブラウザでは通知が届かない場合がございますのでご注意ください</p>
+            </div>
+            <div class="main2">
+                <div id="nav2">
+                    <div class="parts1" v-on:click="pushTest">
+                        <img class="imgs" src="image/test.png" width="200px" height="246px">
+                        <p class="disp">・通知テストで通知が正常に送られてくるかお確かめください！</p>
+                        <p class="disp">・通知が来ない場合、ブラウザが通知に対応していない場合がございます。</p>
+                    </div>
+                    <div class="fileMake" v-on:click="pageChange">
+                        <img class="imgs" src="image/PushMake.png" width="200px">
+                        <p class="disp">・このボタンで通知作成が行えます</p>
+                        <p class="disp">・作成したファイルをお好きな場所に保存してください</p>
+                        <p class="disp">・右の通知読込ボタンで読み込めます</p>
+                    </div>
+                    <div class="fileRead">
+                        <label class="fileGet">
+                            <img class="imgs" src="image/pushRead.png" width="200px">
+                            <p class="fileSelect" v-model:value>{{ message }}</p>
+                            <p class="disp">・このボタンで通知ファイル(.json)を読み込めます</p>
+                            <p class="disp">・左の通知作成ボタンで作成したファイルをお読み込みください</p>
+                            <p class="disp">・右の枠線にドラッグ＆ドロップでも読み込むことができます</p>
+                            <input type="file" id="fileGet"　accept=".JSON" v-on:change="fileRead" style="display:none">
+                        </label>
+                        <div id="fileDrag" class="fileDrag" v-on:dragenter="dragEnter" v-on:dragleave="dragLeave" v-on:dragover="dragOver" v-on:drop="dragRead">読込用の<br>.jsonファイルを<br>ドラッグ＆ドロップ<br>してください</div>
+                    </div>
+                    <div class="parts3" id = "onoff" v-on:click="pushStart">
+                        <img class="imgs" src="image/start.png" width="200px">
+                        <p class="disp">・このボタンで通知開始ができます!</p>
+                        <p class="disp">・もう一度クリック、またはこのページを閉じることで通知を停止できます！</p>
+                    </div>
+                </div>
+                <div id="nav" style="display:none">
+                    <div class="parts1" v-on:click="pushTest">
+                        <img class="imgs" src="image/test.png" width="200px" height="246px">
+                        <p class="disp">・通知テストで通知が正常に送られてくるかお確かめください！</p>
+                        <p class="disp">・通知が来ない場合、ブラウザが通知に対応していない場合がございます。</p>
+                        <p class="disp">・タイトル、通知内容に入力されたテキストを送ります</p>
+                    </div>
+                    <div class="fileMaker" v-on:click="">
+                        <div class="textData"　v-on:click="pageBack">
+                            <img class="imgs" src="image/PushMake.png" width="200px">
+                            <p class="disp">・タイトル、通知内容を入力後、保存ボタンで通知ファイル(.json)が作成されます</p>
+                            <p class="disp">・「通知内容」に入力されたテキストは一行ずつ上から順に通知されます、一文ずつ改行してご使用ください</p>
+                            <p class="disp">・このボタンをクリックするとホームに戻ります</p>
+                        </div>
+                        <div class="textArea">
+                            <form>
+                                <p class="textP">タイトル</p>
+                                <input type="text" class="titleForm">
+                                <p class="textP">通知内容</p>
+                                <textarea class="textAreaForm" wrap="off"></textarea>
+                            </form>
+                            <div class="buttons">
+                                <div class="rewrite">再編集</div>
+                                <div class="save">保存</div>
+                            </div>
+                        </div>
+                        <div id="fileDrag" class="fileDrag2" v-on:dragenter="dragEnter" v-on:dragleave="dragLeave" v-on:dragover="dragOver" v-on:drop="dragRead">再編集用の<br>.jsonファイルを<br>ドラッグ＆ドロップ<br>してください</div>
+                    </div>
+                </div>
+            </div>
+            <script src="js/PushpuffY.js"></script>
+		</body>
+	</html>
