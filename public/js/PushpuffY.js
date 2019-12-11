@@ -68,18 +68,31 @@ new Vue ({
         dragOver:function(){
             event.preventDefault();
         },
+
+        toggleStyleOnfileDrag: function() {
+            const elemFD = document.getElementById("fileDrag");
+            if (elemFD) {
+                const isEnter = elemFD.classList.contains("fileDragEnter");
+                if (isEnter) {
+                    elemFD.classList.remove("fileDragEnter");
+                    elemFD.classList.add("fileDrag");
+                } else {
+                    elemFD.classList.remove("fileDrag");
+                    elemFD.classList.add("fileDragEnter");
+                }
+            }
+
+        },
         dragEnter:function(){
-            document.getElementById("fileDrag").classList.remove("fileDrag");
-	        document.getElementById("fileDrag").classList.add("fileDragEnter");
+            this.toggleStyleOnfileDrag();
         },
         dragLeave:function(){
-            document.getElementById("fileDrag").classList.remove("fileDragEnter");
-	        document.getElementById("fileDrag").classList.add("fileDrag");
+            this.toggleStyleOnfileDrag();
         },
         dragRead:function(){
             event.preventDefault();
-            document.getElementById("fileDrag").classList.remove("fileDragEnter");
-	        document.getElementById("fileDrag").classList.add("fileDrag");
+            this.toggleStyleOnfileDrag();
+
             Push.create("ファイルが指定されました");
             var file =　event.dataTransfer.files[0];
             this.message = event.dataTransfer.files[0].name;
