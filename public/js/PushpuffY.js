@@ -34,7 +34,9 @@ var subNone = ()=>{
 new Vue ({
     el: '.main2',
     data: {
-        message: 'ファイルが選択されておりません'
+        message: 'ファイルが選択されておりません',
+        written: '通知内容を入力してください',
+        title: 'タイトルを入力してください'
     },
     methods: {
         change:function(subject){
@@ -65,6 +67,23 @@ new Vue ({
             });
             reader.readAsText(file);
         },
+        fileRead2:function(event){
+            Push.create("ファイルが指定されました");
+            var file = event.target.files[0];
+            var reader = new FileReader();
+            reader.addEventListener('load',()=>{
+                var rewrite = JSON.parse(reader.result);
+                var rewriteLimit = Object.keys(rewrite).length;
+                var rewriteLimitMinus = rewriteLimit - 1;
+                this.title = rewrite["0"];
+                this.written = "";
+                for (var i = 1; i < rewriteLimitMinus ; i++){
+                    this.written = this.written + rewrite[i] + "\n"
+                }
+                this.written + rewrite[rewriteLimitMinus];
+            });
+            reader.readAsText(file);
+        },
         dragOver:function(){
             event.preventDefault();
         },
@@ -89,6 +108,47 @@ new Vue ({
                 limit = Object.keys(pushobject).length;
             });
             reader.readAsText(file);
+        },
+        dragRead2:function(toggle){
+            event.preventDefault();
+            document.getElementById("fileDrag").classList.remove("fileDragEnter");
+	        document.getElementById("fileDrag").classList.add("fileDrag");
+            Push.create("ファイルが指定されました");
+            var file =　event.dataTransfer.files[0];
+            var reader = new FileReader();
+            reader.addEventListener('load',()=>{
+                var rewrite = JSON.parse(reader.result);
+                var rewriteLimit = Object.keys(rewrite).length;
+                var rewriteLimitMinus = rewriteLimit - 1;
+                this.title = rewrite["0"];
+                this.written = "";
+                for (var i = 1; i < rewriteLimitMinus ; i++){
+                    this.written = this.written + rewrite[i] + "\n"
+                }
+                this.written + rewrite[rewriteLimitMinus];
+            });
+            reader.readAsText(file);
+        },
+        pushGet:function(){
+            var arr = this.written.split(/\r\n|\n/);
+            var jsondata = "{";
+            jsondata = jsondata + '"' + "0" + '"' + ":" + '"' + this.title + '"' + ',';
+            var lastN = arr.length - 1;
+            for (var i = 0; i < lastN; i++){
+                var iplus = i + 1;
+                jsondata = jsondata + '"' + iplus + '"' + ":" + '"' + arr[i] + '"' + ',';
+            }
+            jsondata = jsondata + '"' + arr.length + '"' + ":" + '"' + arr[lastN] + '"' +'}';
+            const blob = new Blob([jsondata], {type: 'application\/json'});
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = this.title + '.json';
+            link.click();
+            URL.revokeObjectURL(url);
+            pushobject = JSON.parse(jsondata);
+            limit = Object.keys(pushobject).length;
+            this.message = pushobject["0"];
         },
         pushTest:function(){
             Push.create("通知は正常に送られました");

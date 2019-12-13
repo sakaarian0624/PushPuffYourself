@@ -35,7 +35,7 @@
                     <div class="fileRead">
                         <label class="fileGet">
                             <img class="imgs" src="image/pushRead.png" width="200px">
-                            <p class="fileSelect" v-model:value>{{ message }}</p>
+                            <p class="fileSelect" v-text:value>{{ message }}</p>
                             <p class="disp">・このボタンで通知ファイル(.json)を読み込めます</p>
                             <p class="disp">・左の通知作成ボタンで作成したファイルをお読み込みください</p>
                             <p class="disp">・右の枠線にドラッグ＆ドロップでも読み込むことができます</p>
@@ -54,7 +54,6 @@
                         <img class="imgs" src="image/test.png" width="200px" height="246px">
                         <p class="disp">・通知テストで通知が正常に送られてくるかお確かめください！</p>
                         <p class="disp">・通知が来ない場合、ブラウザが通知に対応していない場合がございます。</p>
-                        <p class="disp">・タイトル、通知内容に入力されたテキストを送ります</p>
                     </div>
                     <div class="fileMaker" v-on:click="">
                         <div class="textData"　v-on:click="pageBack">
@@ -66,16 +65,19 @@
                         <div class="textArea">
                             <form>
                                 <p class="textP">タイトル</p>
-                                <input type="text" class="titleForm">
+                                <input type="text" class="titleForm" v-model:value ="title">
                                 <p class="textP">通知内容</p>
-                                <textarea class="textAreaForm" wrap="off"></textarea>
+                                <textarea class="textAreaForm" wrap="off" v-model:value ="written"></textarea>
+                                <p style="display:none">{{ written }}</p>
                             </form>
                             <div class="buttons">
-                                <div class="rewrite">再編集</div>
-                                <div class="save">保存</div>
+                                <label class="rewrite">再編集
+                                        <input type="file" id="fileGet"　accept=".JSON" v-on:change="fileRead2" style="display:none">
+                                </label>
+                                <div class="save" v-on:click="pushGet">保存</div>
                             </div>
                         </div>
-                        <div id="fileDrag" class="fileDrag2" v-on:dragenter="dragEnter" v-on:dragleave="dragLeave" v-on:dragover="dragOver" v-on:drop="dragRead">再編集用の<br>.jsonファイルを<br>ドラッグ＆ドロップ<br>してください</div>
+                        <div id="fileDrag" class="fileDrag2" v-on:dragenter="dragEnter" v-on:dragleave="dragLeave" v-on:dragover="dragOver" v-on:drop="dragRead2">再編集用の<br>.jsonファイルを<br>ドラッグ＆ドロップ<br>してください</div>
                     </div>
                 </div>
             </div>
