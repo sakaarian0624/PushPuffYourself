@@ -9,7 +9,7 @@
             <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
             <div class="header">
-                <img src="image/logo.png" height="130px">
+                <img src="image/title2.png" height="130px" alt="通知学習">
             </div>
             <div class="discription">
                 <p class="disp">・このサイトはポートフォリオサイトです！！！</p>
@@ -26,11 +26,14 @@
                         <p class="disp">・通知テストで通知が正常に送られてくるかお確かめください！</p>
                         <p class="disp">・通知が来ない場合、ブラウザが通知に対応していない場合がございます。</p>
                     </div>
-                    <div class="fileMake" v-on:click="pageChange">
-                        <img class="imgs" src="image/PushMake.png" width="200px">
-                        <p class="disp">・このボタンで通知作成が行えます</p>
-                        <p class="disp">・作成したファイルをお好きな場所に保存してください</p>
-                        <p class="disp">・右の通知読込ボタンで読み込めます</p>
+                    <div class="fileMakeBox">
+                        <div class="fileMake" v-on:click="pageChange">
+                            <img class="imgs" src="image/PushMake.png" width="200px">
+                            <p class="disp">・このボタンで通知作成が行えます</p>
+                            <p class="disp">・作成したファイルをお好きな場所に保存してください</p>
+                            <p class="disp">・右の通知読込ボタンで読み込めます</p>
+                        </div>
+                        <a class="back" href="https://pushpuff-ac712.firebaseapp.com">公式配布の通知を<br>使う場合はこちら</a>
                     </div>
                     <div class="fileRead">
                         <label class="fileGet">
@@ -43,10 +46,16 @@
                         </label>
                         <div id="fileDrag" class="fileDrag" v-on:dragenter="dragEnter" v-on:dragleave="dragLeave" v-on:dragover="dragOver" v-on:drop="dragRead">読込用の<br>.jsonファイルを<br>ドラッグ＆ドロップ<br>してください</div>
                     </div>
-                    <div class="parts3" id = "onoff" v-on:click="pushStart">
-                        <img class="imgs" src="image/start.png" width="200px">
-                        <p class="disp">・このボタンで通知開始ができます!</p>
-                        <p class="disp">・もう一度クリック、またはこのページを閉じることで通知を停止できます！</p>
+                    <div class="parts3box">
+                        <div class="parts3" id = "onoff" v-on:click="pushStart">
+                            <img class="imgs" src="image/start.png" width="200px">
+                            <p class="disp">・このボタンで通知開始ができます!</p>
+                            <p class="disp">・もう一度クリック、またはこのページを閉じることで通知を停止できます！</p>
+                        </div>
+                        <div class="back">
+                            <p class="disp">{{ sliderNumber }}秒ごとに通知</p>
+                            <input type="range" class="rangeSlider" min="10" max="300" v-on:change="sliderChange"　v-model="sliderNumber">
+                        </div>
                     </div>
                 </div>
                 <div id="nav" style="display:none">
@@ -55,7 +64,7 @@
                         <p class="disp">・通知テストで通知が正常に送られてくるかお確かめください！</p>
                         <p class="disp">・通知が来ない場合、ブラウザが通知に対応していない場合がございます。</p>
                     </div>
-                    <div class="fileMaker" v-on:click="">
+                    <div class="fileMaker">
                         <div class="textData"　v-on:click="pageBack">
                             <img class="imgs" src="image/PushMake.png" width="200px">
                             <p class="disp">・タイトル、通知内容を入力後、保存ボタンで通知ファイル(.json)が作成されます</p>

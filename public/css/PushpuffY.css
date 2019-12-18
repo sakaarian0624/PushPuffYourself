@@ -1,6 +1,7 @@
 body{
     margin: 0;
-    background-image: url(BGimage/cloud_sea.jpg);
+    background-image: url(BGimage/IMG_0024.PNG);
+    font-family: serif;
 }
 .header{
     margin: 0px;
@@ -59,6 +60,22 @@ body{
     font-size: 15px;
     margin: 20px;
     margin-bottom: 0px;
+    height: 400px;
+}
+.back{
+    width: 200px;
+    display: block;
+    margin: 20px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    height: 75px;
+    background-color: rgb(0,0,0,0.8);
+}
+.back:visited{
+    color: white;
+}
+.back:link{
+    color: white;
 }
 .fileMake:hover{
     background-color: rgb(254,0,0,0.8);
@@ -105,18 +122,22 @@ body{
     font-size: 15px;
     margin: 20px;
     margin-bottom: 0px;
+    height: 400px;
 }
 .parts3:hover{
     background-color: rgb(254,254,0,0.8);
     color: black;
 }
 .parts3on{
-	background-color: rgb(0,254,254,0.8);
+	background-color: rgb(50,0,50,0.8);
 	width: 200px;
     font-size: 15px;
     margin: 20px;
     margin-bottom: 0px;
-    color: black;
+    height: 400px;
+}
+.rangeSlider{
+    width: 195px;
 }
 /*通知作成画面*/
 #nav{
